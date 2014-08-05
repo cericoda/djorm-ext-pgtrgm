@@ -74,8 +74,8 @@ class SimilarQuerySet(QuerySet):
         for lookup, query in kwargs.items():
             if lookup.endswith('__similar'):
                 field = lookup.replace('__similar', '')
-                select = {'%s_distance' % field: "similarity(%s, '%s')" % (field, query)}
-                qs = qs.extra(select=select).order_by('-%s_distance' % field)
+                select = {'%s_similarity' % field: "similarity(%s, '%s')" % (field, query)}
+                qs = qs.extra(select=select).order_by('-%s_similarity' % field)
         return qs
 
 
