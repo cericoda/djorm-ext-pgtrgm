@@ -57,7 +57,7 @@ Installation
 
 ```sql
 
-    CREATE INDEX desctiption_trgm_idx ON myapp_product USING gist (description gist_trgm_ops);
+    CREATE INDEX description_trgm_idx ON myapp_product USING gist (description gist_trgm_ops);
 ```
 
 Usage
