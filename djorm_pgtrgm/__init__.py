@@ -80,9 +80,11 @@ class SimilarQuerySet(QuerySet):
 
 
 class SimilarManager(models.Manager):
+    def filter(self, *args, **kwargs):
+        return self.get_queryset().filter(*args, **kwargs)
 
     def get_queryset(self):
         return SimilarQuerySet(self.model, using=self._db)
 
-    def filter_o(self, **kwargs):
-        return self.get_queryset().filter_o(**kwargs)
+    def filter_o(self, *args, **kwargs):
+        return self.get_queryset().filter_o(*args, **kwargs)
