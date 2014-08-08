@@ -24,7 +24,7 @@ setup(
     version = __version__,
     description = __doc__,
     long_description = open(os.path.join(os.path.dirname(__file__), 'README.md')).read(),
-    author = ', '.join(__authors__),
+    author = u', '.join(__authors__),
     author_email = "jleivaizq@gmail.com",
     url = __github_url__,
     classifiers=[
