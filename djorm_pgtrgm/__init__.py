@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """Django ORM extension for PostgreSQL trigram indexing (`__similar` string search)"""
 
+
 try:
+    from django.db.models import Manager
+    from django.db.models.query import QuerySet
     from django.db import backend
     from django.db import connection
-    from django.db import models
     from django.db.models.fields import Field, subclassing
-    from django.db.models.query import QuerySet
     from django.db.models.sql.constants import QUERY_TERMS
     from django.contrib.gis.db.models.sql.query import ALL_TERMS
 
@@ -16,6 +17,8 @@ try:
 
 except:
     backend_allowed = None
+    Manager = ImportError("Settings cannot be imported, because environment variable DJANGO_SETTINGS_MODULE is undefined.")
+    QuerySet = Manager
 
 __version__ = "0.1.1"
 __authors__ = [
@@ -94,7 +97,7 @@ class SimilarQuerySet(QuerySet):
         return qs
 
 
-class SimilarManager(models.Manager):
+class SimilarManager(Manager):
     def filter(self, *args, **kwargs):
         return self.get_queryset().filter(*args, **kwargs)
 
