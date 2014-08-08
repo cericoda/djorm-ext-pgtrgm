@@ -86,14 +86,25 @@ if backend_allowed:
 
 
 class SimilarQuerySet(QuerySet):
+    # Append the similarity score because a subsequent values or values_list might expect it due to the order_by
+    def filter(self, **kwargs):
+        qs = super(SimilarQuerySet, self).filter(**kwargs)
+        for lookup, query in kwargs.items():
+            if lookup.endswith('__similar'):
+                field = lookup[:-9]
+                select = {'%s_similarity' % field: "similarity(%s, '%s')" % (field, query)}
+                qs = qs.extra(select=select)
+        return qs
 
     def filter_o(self, **kwargs):
         qs = super(SimilarQuerySet, self).filter(**kwargs)
         for lookup, query in kwargs.items():
             if lookup.endswith('__similar'):
-                field = lookup.replace('__similar', '')
+                field = lookup[:-9]
                 select = {'%s_similarity' % field: "similarity(%s, '%s')" % (field, query)}
-                qs = qs.extra(select=select).order_by('-%s_similarity' % field)
+                qs = qs.extra(select=select)
+                # TODO: DRY this. All the code above exactly repeats SimilarQuerySet.filter() method
+                qs = qs.order_by('-%s_similarity' % field)
         return qs
 
 
