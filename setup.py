@@ -13,21 +13,20 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with this software.  If not, see <http://www.gnu.org/licenses/>.
+"""Django ORM extension for PostgreSQL trigram indexing (`__similar` string search)"""
 
 import os
 from setuptools import setup, find_packages
-
-
-def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+from djorm_pgtrgm import __version__, __github_url__, __authors__
 
 setup(
-    name="djorm-ext-pgtrgm",
-    version="0.1",
-    author="José Antonio Leiva",
-    author_email="jleivaizq@gmail.com",
-    description="Django application with some addons regarding PostgreSQL trigram text comparison",
-    long_description=(read('README.md') + '\n\n' + read('CHANGES.rst')),
+    name = "djorm-ext-pgtrgm",
+    version = __version__,
+    description = __doc__,
+    long_description = open(os.path.join(os.path.dirname(__file__), 'README.md')).read(),
+    author = ', '.join(__authors__),
+    author_email = "jleivaizq@gmail.com",
+    url = __github_url__,
     classifiers=[
         'Development Status :: 4 - Beta',
         'Framework :: Django',
@@ -37,7 +36,6 @@ setup(
     ],
     license="LGPL 3",
     keywords="django,querysets,lookup,pg_trgrm,similar,search",
-    url='https://github.com/jleivaizq/djorm-ext-pgtrgm',
     packages=['djorm_pgtrgm'],
     include_package_data=True,
     zip_safe=False,

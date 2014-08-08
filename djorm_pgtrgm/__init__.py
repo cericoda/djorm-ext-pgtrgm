@@ -1,3 +1,5 @@
+"""Django ORM extension for PostgreSQL trigram indexing (`__similar` string search)"""
+
 from django.db import backend
 from django.db import connection
 from django.db import models
@@ -5,6 +7,14 @@ from django.db.models.fields import Field, subclassing
 from django.db.models.query import QuerySet
 from django.db.models.sql.constants import QUERY_TERMS
 from django.contrib.gis.db.models.sql.query import ALL_TERMS
+
+__version__ = "0.1.1"
+__authors__ = [
+    'José Antonio Leiva <jleivaizq@gmail.com>',
+    'Pablo Martín <goinnn@gmail.com>',
+    'Hobson <hobson@totalgood.com>',
+    ]
+__github_url__ = "https://github.com/jleivaizq/djorm-ext-pgtrgm"   # % (__name__)
 
 db_backends_allowed = ('postgresql', 'postgis')
 
