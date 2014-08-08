@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Django ORM extension for PostgreSQL trigram indexing (`__similar` string search)"""
 
+from django.db import backend
 try:
-    from django.db import backend
     from django.db import connection
     from django.db import models
     from django.db.models.fields import Field, subclassing
