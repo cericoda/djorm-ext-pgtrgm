@@ -1,16 +1,21 @@
 # -*- coding: utf-8 -*-
 """Django ORM extension for PostgreSQL trigram indexing (`__similar` string search)"""
 
-from django.db import backend
 try:
+    from django.db import backend
     from django.db import connection
     from django.db import models
     from django.db.models.fields import Field, subclassing
     from django.db.models.query import QuerySet
     from django.db.models.sql.constants import QUERY_TERMS
     from django.contrib.gis.db.models.sql.query import ALL_TERMS
+
+    db_backends_allowed = ('postgresql', 'postgis')
+    backend_allowed = reduce(
+        lambda x, y: x in backend.__name__ or y, db_backends_allowed)
+
 except:
-    pass
+    backend_allowed = None
 
 __version__ = "0.1.1"
 __authors__ = [
@@ -20,7 +25,6 @@ __authors__ = [
     ]
 __github_url__ = "https://github.com/jleivaizq/djorm-ext-pgtrgm"   # % (__name__)
 
-db_backends_allowed = ('postgresql', 'postgis')
 
 
 def get_prep_lookup(self, lookup_type, value):
