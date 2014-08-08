@@ -59,9 +59,6 @@ def monkey_get_db_prep_lookup(cls):
             monkey_get_db_prep_lookup(new_cls)
 
 
-backend_allowed = reduce(
-    lambda x, y: x in backend.__name__ or y, db_backends_allowed)
-
 if backend_allowed:
 
     if isinstance(QUERY_TERMS, set):
