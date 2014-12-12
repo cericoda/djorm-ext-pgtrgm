@@ -9,7 +9,7 @@ try:
     from django.db import connection
     from django.db.models.fields import Field, subclassing
     from django.db.models.sql.constants import QUERY_TERMS
-    from django.contrib.gis.db.models.sql.query import ALL_TERMS
+    # from django.contrib.gis.db.models.sql.query import ALL_TERMS
 
     db_backends_allowed = ('postgresql', 'postgis')
     backend_allowed = reduce(
